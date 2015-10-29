@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name uilabApp.controller:MainCtrl
+ * @name uiLabApp.controller:LoginCtrl
  * @description
- * # MainCtrl
- * Controller of the uilabApp
+ * # LoginCtrl
+ * Controller of the uiLabApp
  */
 angular.module('uilabApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('LoginCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

@@ -1,0 +1,27 @@
+<header class="login-header">
+  <div class="application-name">
+    <img src="images/Logo_Misys.png" class="logoLogin" title="Misys" alt="Misys">
+    <span class="seperator-productname">|</span>
+    <span class="productname">UI Developer Lab</span>
+  </div>
+</header>
+<section class="login-content">
+  <div class="cyan-bar">
+  </div>
+  <section class="left-column">
+    <form name="form" class="form-group login-form" ng-submit="loginCtrl.login(loginCtrl.selectedUser, loginCtrl.selectedTenant)">
+      <fieldset class="mlogininput">
+        <label>User Name</label>
+        <select name="user" ng-model="loginCtrl.selectedUser" ng-options="user.name for user in loginCtrl.users" ng-change="loginCtrl.onUserChange(loginCtrl.selectedUser)" class="form-control user-input mandatory" required></select>
+        <label>User Type</label>
+        <select name="tenant" ng-model="loginCtrl.selectedTenant" ng-options="tenant.description for tenant in loginCtrl.tenants" class="form-control tenant-input mandatory" required></select>
+      </fieldset>
+      <fieldset class="submitBtnFieldSet">
+        <button type="submit">Sign in</button>
+      </fieldset>
+    </form>
+  </section>
+</section>
+<footer class="login-footer">
+  © 2015 Misys
+</footer>

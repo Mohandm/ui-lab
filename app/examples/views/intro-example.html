@@ -1,0 +1,15 @@
+<div class="container">
+  <form ng-submit="IntroExampleCtrl.onSubmit()" name="IntroExampleCtrl.form" novalidate>
+    <formly-form model="IntroExampleCtrl.model" fields="IntroExampleCtrl.fields" options="IntroExampleCtrl.options" form="IntroExampleCtrl.form">
+      <button type="submit" class="btn btn-primary submit-button" ng-disabled="IntroExampleCtrl.form.$invalid">Submit</button>
+      <button type="button" class="btn btn-default" ng-click="IntroExampleCtrl.options.resetModel()">Reset</button>
+    </formly-form>
+  </form>
+  <h2>Form Data</h2>
+  <pre>{{IntroExampleCtrl.model | json}}</pre>
+
+  <h2>Form Fields</h2>
+  <pre>{{IntroExampleCtrl.fields}}</pre>
+</div>
+
+

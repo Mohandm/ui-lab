@@ -1,0 +1,15 @@
+<div class="container">
+  <form ng-submit="CodementorCtrl.onSubmit()" name="CodementorCtrl.form" novalidate>
+    <formly-form model="CodementorCtrl.model" fields="CodementorCtrl.fields" options="CodementorCtrl.options" form="CodementorCtrl.form">
+      <button type="submit" class="btn btn-primary submit-button" ng-disabled="CodementorCtrl.form.$invalid">Submit</button>
+      <button type="button" class="btn btn-default" ng-click="CodementorCtrl.options.resetModel()">Reset</button>
+    </formly-form>
+  </form>
+  <h2>Form Data</h2>
+  <pre>{{CodementorCtrl.model | json}}</pre>
+
+  <h2>Form Fields</h2>
+  <pre>{{CodementorCtrl.fields | json}}</pre>
+</div>
+
+

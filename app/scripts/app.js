@@ -15,17 +15,26 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'formly',
+    'formlyBootstrap'
   ])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl',
+        controllerAs: 'LoginCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+      .when('/intro-example', {
+        templateUrl: 'examples/views/intro-example.html',
+        controller: 'IntroExampleCtrl',
+        controllerAs: 'IntroExampleCtrl'
+      })
+      .when('/codementor', {
+        templateUrl: 'examples/views/codementor.html',
+        controller: 'CodementorCtrl',
+        controllerAs: 'CodementorCtrl'
       })
       .otherwise({
         redirectTo: '/'
