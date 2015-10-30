@@ -16,6 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'ui.bootstrap',
+    'ngAside',
     'formly',
     'formlyBootstrap'
   ])
@@ -25,6 +27,11 @@ angular
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
         controllerAs: 'LoginCtrl'
+      })
+      .when('/designer', {
+        templateUrl: 'views/designer.html',
+        controller: 'DesignerCtrl',
+        controllerAs: 'DesignerCtrl'
       })
       .when('/intro-example', {
         templateUrl: 'examples/views/intro-example.html',

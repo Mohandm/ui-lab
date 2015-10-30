@@ -5,6 +5,7 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/../fonts/bootstrap/";
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+@import "fontawesome/scss/font-awesome.scss";
 // endbower
 
 /* Login Dialog - Start */
@@ -575,8 +576,8 @@ button:active {
     background-color: #ccd7e8;
 }
 .navbar {
-    min-height: 55px;
-    height: 55px;
+    min-height: 50px;
+    height: 50px;
     border-radius: 0;
     background-image: none;
     background-color: #666666;
@@ -624,7 +625,7 @@ button:active {
     background-color: #00afd8 !important;
 }
 .navbar-default .navbar-form {
-    margin-top: 10px;
+    margin-top: 0px;
 }
 .navbar-default .navbar-form .form-group {
     position: relative;
@@ -633,11 +634,11 @@ button:active {
     color: #666666;
     position: absolute;
     right: 15px;
-    top: 13px;
+    top: 10px;
     font-size: 18px;
 }
 .navbar-default .navbar-form .form-control {
-    height: 50px;
+    height: 45px;
     width: 350px;
     font-family: 'OpenSansRegular', sans-serif;
     background-color: #d9d9d9;
@@ -3681,4 +3682,27 @@ a.list-group-item.active > .badge,
 }
 .page-form-container{
     padding: 5px 15px;
+}
+.header-icon{
+  cursor: pointer;
+  font-size: 20px;
+}
+.right-header-icons{
+  padding: 5px;
+  margin: 0px 30px 0px 0px;
+  font-size: 22px;
+  color: white;
+}
+.right-header-icons:hover{
+  color: lightgrey;
+}
+.modal-open #content {
+  -webkit-transition:all .2s, -webkit-transform .2s;
+  transition:all .2s ease-out, -webkit-transform .2s
+}
+.modal-open.left #content {
+  transform: translate(320px, 0);
+}
+.ng-aside .modal-content {
+  min-width: 320px;
 }
