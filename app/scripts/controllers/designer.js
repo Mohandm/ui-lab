@@ -8,7 +8,12 @@
  * Controller of the uiLabApp
  */
 angular.module('uilabApp')
-  .controller('DesignerCtrl', function ($scope, $aside) {
+  .controller('DesignerCtrl', function ($scope, $aside, MainService, toastr, $routeParams) {
+    $scope.userType = $routeParams.userType;
+    $scope.mode = $routeParams.mode;
+    $scope.pageId = $routeParams.pageId;
+
+    console.warn($scope.userType, " ", $scope.mode, " ", $scope.pageId);
     $scope.asideState = {
       open: false
     };
@@ -27,21 +32,30 @@ angular.module('uilabApp')
           };
 
           $aside.open({
-            templateUrl: 'views/aside.html',
+            templateUrl: 'views/listpages.html',
             placement: position,
             size: 'sm',
             backdrop: backdrop,
-            controller: function($scope, $modalInstance) {
-              $scope.ok = function(e) {
-                $modalInstance.close();
-                e.stopPropagation();
-              };
-              $scope.cancel = function(e) {
-                $modalInstance.dismiss();
-                e.stopPropagation();
-              };
-            }
+            controller: 'ListpagesController',
+            controllerAs: 'listpagesCtrl'
           }).result.then(postClose, postClose);
         }
+      };
+
+    $scope.addPage = function(){
+      if($scope.pageName)
+      {
+
+        var pagesListPromise = MainService.addPage($scope.pageName);
+        pagesListPromise.then(function(data){
+          toastr.success("Page Added Successfully : ",$scope.pageName);
+          $scope.pageName = '';
+          $scope.openAside('left', true);
+        }, function(reason) {
+          toastr.error($scope.pageName, 'Failed to Add Page : ');
+          $scope.pageName = '';
+          $scope.openAside('left', true);
+        });
       }
+    };
   });

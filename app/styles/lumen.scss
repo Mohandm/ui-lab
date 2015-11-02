@@ -3706,3 +3706,21 @@ a.list-group-item.active > .badge,
 .ng-aside .modal-content {
   min-width: 320px;
 }
+
+.listPages{
+  padding-top: 50px;
+}
+
+.listPages .ui-list-view-bordered{
+  height:700px;
+}
+
+a{
+  cursor: pointer;
+}
+.listPages .ui-list-view-bordered > .ui-list-view-cell{
+  cursor: pointer;
+}
+.listPages .ui-list-view-bordered > .ui-list-view-cell:hover{
+  background-color: lightgrey;
+}

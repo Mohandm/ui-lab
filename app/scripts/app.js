@@ -19,19 +19,16 @@ angular
     'ui.bootstrap',
     'ngAside',
     'formly',
-    'formlyBootstrap'
+    'formlyBootstrap',
+    'ui-listView',
+    'toastr'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, toastrConfig) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
         controllerAs: 'LoginCtrl'
-      })
-      .when('/designer', {
-        templateUrl: 'views/designer.html',
-        controller: 'DesignerCtrl',
-        controllerAs: 'DesignerCtrl'
       })
       .when('/intro-example', {
         templateUrl: 'examples/views/intro-example.html',
@@ -43,7 +40,17 @@ angular
         controller: 'CodementorCtrl',
         controllerAs: 'CodementorCtrl'
       })
+      .when('/designer/:userType?/:mode?/:pageId?', {
+        templateUrl: 'views/designer.html',
+        controller: 'DesignerCtrl',
+        controllerAs: 'DesignerCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
+
+
+    angular.extend(toastrConfig, {
+        positionClass: 'toast-bottom-right'
+    });
   });

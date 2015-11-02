@@ -3,10 +3,9 @@
     <a class="navbar-brand" href="#"><img class="logo" src="images/Header_Misys_logo22px.png"></a>
     <form class="navbar-form navbar-left" role="search">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Add Page">
-        <div class= "magnifier">
-          <a class="header-icon"><i class="fa fa-plus"></i></a>
-        </div>
+        <input type="text" class="form-control" ng-model="pageName" placeholder="Add Page">
+        <a class="magnifier header-icon" ng-click="addPage()"><i class="fa fa-plus"></i></a>
+
       </div>
     </form>
     <!-- /.container-fluid -->
