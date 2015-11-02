@@ -15,16 +15,16 @@ angular.module('uilabApp')
 
     $scope.openAside = function(position, backdrop) {
 
+      function postClose() {
+        $scope.asideState.open = false;
+      }
+
       if(!$scope.asideState.open)
       {
           $scope.asideState = {
             open: true,
             position: position
           };
-
-          function postClose() {
-            $scope.asideState.open = false;
-          }
 
           $aside.open({
             templateUrl: 'views/aside.html',
