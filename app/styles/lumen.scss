@@ -586,7 +586,7 @@ button:active {
     color: #ffffff;
     -webkit-box-shadow: none;
     box-shadow: none;
-    z-index: 2000;
+    z-index: 1000;
 }
 .navbar-default .navbar-nav > .active > a {
     background-image: none;
@@ -1709,7 +1709,7 @@ table .checkbox,
 .input-group .checkbox input[type="checkbox"],
 table .checkbox input[type="checkbox"],
 .modal .checkbox input[type="checkbox"] {
-    display: none;
+    /*display: none;*/
 }
 .form-group .checkbox input[type="checkbox"] + label:before,
 .input-group .checkbox input[type="checkbox"] + label:before,
@@ -1750,7 +1750,7 @@ table .radio,
 .input-group .radio input[type="radio"],
 table .radio input[type="radio"],
 .modal .radio input[type="radio"] {
-    display: none;
+    /*display: none;*/
 }
 .form-group .radio input[type="radio"] + label:before,
 .input-group .radio input[type="radio"] + label:before,
@@ -2720,6 +2720,7 @@ table td:last-child {
 }
 .popover-content {
     padding: 9px 14px;
+    background-color: lightblue;
 }
 .popover .arrow,
 .popover .arrow:after {
@@ -3722,5 +3723,27 @@ a{
   cursor: pointer;
 }
 .listPages .ui-list-view-bordered > .ui-list-view-cell:hover{
+  background-color: lightgrey;
+}
+.drop-box {
+  background: #F8F8F8;
+  border: 5px dashed #DDD;
+  width: 200px;
+  height: 65px;
+  text-align: center;
+  padding-top: 25px;
+  margin: 10px;
+}
+.dragover {
+  border: 5px dashed blue;
+}
+.designer .radio input[type="radio"],
+.designer .radio-inline input[type="radio"],
+.designer .checkbox input[type="checkbox"],
+.designer .checkbox-inline input[type="checkbox"]{
+  margin-top: -4px;
+}
+
+.components-panel .form-horizontal{
   background-color: lightgrey;
 }

@@ -44,7 +44,7 @@ angular
         controller: 'CodementorCtrl',
         controllerAs: 'CodementorCtrl'
       })
-      .when('/designer/:userType?/:mode?/:pageId?', {
+      .when('/designer/:userType?/:pageId?', {
         templateUrl: 'views/designer.html',
         controller: 'DesignerCtrl',
         controllerAs: 'DesignerCtrl'
@@ -57,8 +57,10 @@ angular
     angular.extend(toastrConfig, {
         positionClass: 'toast-bottom-right'
     });
-  }).run([
+  })
+  .run([
   '$builder', function ($builder) {
+      $builder.config.popoverPlacement = 'left';
     $builder.registerComponent('radioFlat', {
       group: 'Default',
       label: 'radio inline',
@@ -111,4 +113,47 @@ angular
     });
 
   }
-]);
+  ])
+  .filter('to_trusted', ['$sce', function ($sce) {
+    return function (text) {
+      return $sce.trustAsHtml(text);
+    };
+  }])
+  .filter('getByKey', function () {
+    return function (input, key) {
+      var i = 0, len = input.length;
+      for (; i < len; i++) {
+        if (input[i].key == key) {
+          var returnObj = input[i];
+          var j = i + 1;
+          return { obj: returnObj, index: j };
+        }
+      }
+      return null;
+    }
+  })
+  .filter('getByProperty', function () {
+    return function (input, propertyName, propertyValue) {
+      var i = 0, len = input.length;
+      for (; i < len; i++) {
+        if (input[i].hasOwnProperty(propertyName) && input[i][propertyName] == propertyValue) {
+          var returnObj = input[i];
+
+          return { obj: returnObj, index: i };
+        }
+      }
+      return null;
+    }
+  })
+  .filter('getByHasProperty', function () {
+    return function (input, propertyName) {
+      var foundObjs = new Array();
+      var i = 0, len = input.length;
+      for (; i < len; i++) {
+        if (input[i].hasOwnProperty(propertyName)) {
+          foundObjs.push(input[i]);
+        }
+      }
+      return foundObjs;
+    }
+  });

@@ -9,8 +9,8 @@
       </div>
     </form>
     <!-- /.container-fluid -->
-    <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Preview" data-placement="bottom"><i class="fa fa-eye"></i></a>
-    <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Edit" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>
+    <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Preview" data-placement="bottom" ng-click="changeMode('preview')"><i class="fa fa-eye"></i></a>
+    <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Edit" data-placement="bottom" ng-click="changeMode('edit')"><i class="fa fa-pencil-square-o"></i></a>
     <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Pages" data-placement="bottom" ng-click="openAside('left', true)"><i class="fa fa-server"></i></a>
 </nav>
 <div class="row">
@@ -22,13 +22,16 @@
   </div>
 </div>
 <div class="container-fluid">
-  <div class="row">
-
+  <div class="row" ng-show="mode === 'edit'">
     <hr />
+    <div class="col-md-4">
+      <div fb-components class="components-panel">
 
-    <div class="col-md-6">
+      </div>
+    </div>
+    <div class="col-md-8 designer">
       <p>
-        <button type="button" class="btn btn-primary" ng-click="vm.StartScratch()">Start From Scratch</button>
+        <button type="button" class="btn btn-primary" ng-click="StartScratch()">Start From Scratch</button>
       </p>
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -48,29 +51,23 @@
 
       </div>
     </div>
-    <div class="col-md-6">
-      <div fb-components class="components-panel">
-
-      </div>
-    </div>
-
   </div>
 
 
 
 
 
-  <div style="z-index:1;background-color:white;position:relative">
-    <a href="{{vm.SwitchView.link}}">{{vm.SwitchView.text}}</a>
-    <h1>{{vm.exampleTitle}}</h1>
+  <div style="z-index:1;background-color:white;position:relative" ng-show="mode === 'preview'" class="designer">
+    <a href="{{SwitchView.link}}">{{SwitchView.text}}</a>
+    <h1>{{exampleTitle}}</h1>
 
     <hr />
-    <div kcd-recompile="vm.fields">
-      <formly-form model="vm.model" fields="vm.fields" form="vm.form1">
+    <div kcd-recompile="fields">
+      <formly-form model="model" fields="fields" form="form1">
         <br />
         <br />
         <p>
-          <button type="button" class="btn btn-primary" ng-click="vm.RawFieldCode()">View formly Design Raw Code</button>
+          <button type="button" class="btn btn-primary" ng-click="RawFieldCode()">View formly Design Raw Code</button>
 
         </p>
       </formly-form>
@@ -85,7 +82,7 @@
     <div ng-if="isFormlyShowScope">
       <hr />
       <h2>Model</h2>
-      <pre>{{vm.model | json}}</pre>
+      <pre>{{model | json}}</pre>
       <h2>Fields <small>(note, functions are not shown)</small></h2>
       <pre>{{rawFieldCode|json}}</pre>
     </div>

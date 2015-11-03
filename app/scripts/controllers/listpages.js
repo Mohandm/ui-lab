@@ -10,7 +10,7 @@ angular.module('uilabApp')
       });
 
       $scope.openPageDesigner = function(pageId){
-        $location.path('/designer/' + $scope.userType +'/edit/'+ pageId);
+        $location.path('/designer/' + $scope.userType +'/'+ pageId);
         $modalInstance.close();
       };
 
