@@ -35,14 +35,14 @@
       </p>
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Builder</h3>
+          <h3 class="panel-title">{{pageName}}</h3>
         </div>
         <div fb-builder="default"></div>
-
-        <div class="panel-footer">
+        <hr class="marginForScopeViewButtons">
+        <div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" ng-model="isShowScope" />
+              <input type="checkbox" class="noMarginTop" ng-model="isShowScope" />
               Show scope
             </label>
           </div>
@@ -59,7 +59,7 @@
 
   <div style="z-index:1;background-color:white;position:relative" ng-show="mode === 'preview'" class="designer">
     <a href="{{SwitchView.link}}">{{SwitchView.text}}</a>
-    <h1>{{exampleTitle}}</h1>
+    <h2>{{exampleTitle}}</h2>
 
     <hr />
     <div kcd-recompile="fields">
@@ -67,15 +67,15 @@
         <br />
         <br />
         <p>
-          <button type="button" class="btn btn-primary" ng-click="RawFieldCode()">View formly Design Raw Code</button>
-
+          <hr class="marginForScopeViewButtons">
+          <button type="button" class="btn btn-primary" ng-click="RawFieldCode()">View Raw Code</button>
         </p>
       </formly-form>
     </div>
 
     <div class="checkbox">
       <label>
-        <input type="checkbox" ng-model="isFormlyShowScope" />
+        <input type="checkbox" class="noMarginTop" ng-model="isFormlyShowScope" />
         Show scope
       </label>
     </div>

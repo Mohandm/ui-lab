@@ -44,8 +44,8 @@
                   formObject.options = $scope.options;
                   formObject.templateOptions = $scope.templateOptions;
                   formObject.expressionProperties = $scope.expressionProperties;
-                  
-                  
+
+
                   return formObject.validation = $scope.validation;
               }, true);
               $scope.$watch('optionsText', function (text) {
@@ -104,7 +104,7 @@
                   $scope.key = this.model.key;
                   $scope.templateOptions = this.model.templateOptions;
                   $scope.expressionProperties = this.model.expressionProperties;
-                  
+
                   return $scope.validation = this.model.validation;
               }
           };
@@ -216,7 +216,7 @@
                       $(element).addClass('fb-builder');
                       return;
                   }
-                      
+
                   scope.formName = attrs.fbBuilder;
                   if ((_base = $builder.forms)[_name = scope.formName] == null) {
                       _base[_name] = [];
@@ -252,23 +252,23 @@
 
 
                               if (e.pageY > positions[index - 1] && e.pageY <= positions[index]) {
-                                
-                                  
+
+
                                   var elementIsContainer = false;
                                   if (index - 1 >= 0)
                                   {
                                       //if hoved over element is container
-                                     
+
                                       elementIsContainer = $($formObjects[index - 1]).find(".fb-builder").length > 0;
-                                      
-                                      
+
+
                                         }
-                             
-                                 
+
+
                                   $(element).find('.empty').remove();
                                   $empty = $("<div class='fb-form-object-editable empty'></div>");
                                   if (!elementIsContainer) {
-                                      
+
                                       //only move pass the element before add the empty element, this is for the nested element
 
                                       if (index - 1 < $formObjects.length) {
@@ -280,7 +280,7 @@
                                           $empty.insertAfter($($formObjects[index - 2]));
 
                                       }
-                                     
+
                                   }
                                   else
                                   {
@@ -289,7 +289,7 @@
                                           $empty.insertBefore($($formObjects[index - 1]));
                                       }
 
-                                      
+
                                   }
                                   break;
                               }
@@ -317,7 +317,7 @@
                               }
                           } else if (isHover) {
 
-                              
+
                               if (draggable.mode === 'mirror') {
                                   //drag an element from component area
                                 //  if ($(draggable.element).find(".DropableDesign").length > 0)
@@ -328,7 +328,7 @@
                               }
 
                               if (draggable.mode === 'drag') {
-                                  //if it is move 
+                                  //if it is move
                                   formObject = draggable.object.formObject;
                                   var newFormObjectID, oldFormObjectID;
                                     var idParts = formObject.id.split("-");
@@ -344,8 +344,8 @@
                                     newIdParts=[];
                                     newIdParts.push(scope.formName);
                                     newIdParts.push(elementNameParts.join("-"))
-                                   
-                                   
+
+
                                     newFormObjectID = newIdParts.join("-");
                                     oldFormObjectID = formObject.id;
                                     changePropertyName = function (obj,searchString,subString) {
@@ -354,7 +354,7 @@
                                             {
                                                 var oldid = value.id;
                                                 var newid = value.id.replace(searchString, subString);
-                                                value.id = newid;                                              
+                                                value.id = newid;
                                                 //if this component is container, loop
                                                 if (value.isContainer)
                                                 {
@@ -362,7 +362,7 @@
                                                     delete $builder.forms[oldid];
                                                     changePropertyName($builder.forms[newid], oldid, newid);
                                                 }
-                                                
+
                                             }
                                         });
                                     };
@@ -376,18 +376,18 @@
                                             changePropertyName($builder.forms[newFormObjectID], oldFormObjectID, newFormObjectID);
                                         }
                                     }
-                                        
+
 
                                     newIndex = $(element).find('.empty').index();
-                                    
+
                                       $builder.removeFormObject(oldFormName, formObject.index);
                                       $builder.insertFormObject(scope.formName, newIndex, formObject);
-                                       
-                                
+
+
                               }
                               return $(element).find('.empty').remove();
                           }
-                          
+
                       }
                   });
               }
@@ -772,7 +772,7 @@
                  */
 
                 /*
-                if element B has nested formbuilder, 
+                if element B has nested formbuilder,
                 "cave out" that area;
                 */
 
@@ -807,7 +807,7 @@
                 return isHover.x && isHover.y;
             };
         })(this);
-        
+
         this.isHover = (function (_this) {
             return function ($elementA, $elementB) {
 
@@ -818,14 +818,14 @@
                  */
 
                 /*
-                if element B has nested formbuilder, 
+                if element B has nested formbuilder,
                 "cave out" that area;
                 */
 
 
                 //if any of the child container is hovered over, return false
                 childContainers = $elementB.find(".fb-builder");
-                
+
                 for (i = 0; i < childContainers.length; i++) {
                     childContainer = $(childContainers[i]);
                     targetFormName = childContainer.attr("fb-builder");
@@ -844,8 +844,8 @@
                         return false;
                 }
 
-                
-               
+
+
                 return _this.checkHover($elementA, $elementB);
             };
         })(this);
@@ -1231,7 +1231,7 @@
         };
         this.convertFormObject = function (name, formObject) {
             var component, result, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9, _ref10, _ref11, _ref12;
-          
+
             if (formObject == null) {
                 formObject = {};
             }
@@ -1256,8 +1256,8 @@
                 templateOptions: (_ref10 = formObject.templateOptions) != null ? _ref10 : component.templateOptions,
                 expressionProperties: (_ref11 = formObject.expressionProperties) != null ? _ref11 : component.expressionProperties,
                 noFormControl: (_ref12 = formObject.noFormControl) != null ? _ref12 : component.noFormControl
-                
-               
+
+
             };
             return result;
         };
@@ -1267,7 +1267,7 @@
                 formObjects = _this.forms[name];
                 for (index = _i = 0, _ref = formObjects.length; _i < _ref; index = _i += 1) {
                     //TODO: should be fixed from the source, where those extra components came from
-                    if (formObjects[index]) 
+                    if (formObjects[index])
                         formObjects[index].index = index;
                     else
                         _this.removeFormObject(name, index);
@@ -1300,14 +1300,14 @@
                     cache: $templateCache
                 }).success(function (template) {
                     component.popoverTemplate = template;
-                    //add shared component elements for all components such as the cancel button and 
+                    //add shared component elements for all components such as the cancel button and
                     return loadPopoverSharedElements(component);
                 });
             }
             else {
                 return loadPopoverSharedElements(component);
             }
-            
+
         };
        loadPopoverSharedElements = function (component)
        {
@@ -1317,13 +1317,13 @@
                {
             $originalHTML.find("form").children().first().prepend("<div class='form-group'><label class='control-label'>Key</label><input type='text' ng-model='key' class='form-control' /></div>");
            }
-           $originalHTML.find("form").children(".form-group").last().after("<div class='form-group'><label class='control-label'>Validation Expression</label><input type='text' ng-model='expressionProperties' class='form-control' /><p class='help-block'>Example:&quot;hide&quot;:&quot;model.myDate===''&quot;</p></div>" + "<div class='form-group'><label class='control-label'>SharePoint List Field Name</label><input type='text' ng-model='templateOptions.listFieldName' class='form-control' /><p class='help-block'>if you want to push this field value to the target SharePoint list, specify the field name here</p></div>");
+           $originalHTML.find("form").children(".form-group").last().after("<div class='form-group'><label class='control-label'>Validation Expression</label><input type='text' ng-model='expressionProperties' class='form-control' /><p class='help-block'>Example:&quot;hide&quot;:&quot;model.myDate===''&quot;</p></div>");
 
            $originalHTML.find("form").children().last().append("<hr /><div class='form-group'><input type='submit' ng-click='popover.save($event)' class='btn btn-primary' value='Save' /><input type='button' ng-click='popover.cancel($event)' class='btn btn-default' value='Cancel' /><input type='button' ng-click='popover.remove($event)' class='btn btn-danger' value='Delete' /></div>");
-            
+
             var newHTML = $originalHTML.html();
             return component.popoverTemplate = newHTML;
-           
+
         };
         this.registerComponent = (function (_this) {
             return function (name, component) {

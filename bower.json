@@ -23,7 +23,8 @@
     "angular-validator": "*",
     "jquery-ui": "*",
     "placeholders": "*",
-    "ng-file-upload": "*"
+    "ng-file-upload": "*",
+    "underscore.string" : "*"
   },
   "devDependencies": {
     "angular-mocks": "1.4.7",

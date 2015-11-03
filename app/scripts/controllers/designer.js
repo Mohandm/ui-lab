@@ -8,10 +8,11 @@
  * Controller of the uiLabApp
  */
 angular.module('uilabApp')
-  .controller('DesignerCtrl', function ($scope, $aside, MainService, toastr, $routeParams, formlyVersion, getOIMConfig,  $builder, $validator, $timeout, $location, constantData) {
+  .controller('DesignerCtrl', function ($scope, $aside, string, MainService, toastr, $routeParams, formlyVersion, getOIMConfig,  $builder, $validator, $timeout, $location, constantData) {
     $scope.userType = $routeParams.userType;
     $scope.mode = 'edit';
     $scope.pageId = $routeParams.pageId;
+    $scope.pageName = string($scope.pageId).humanize().s;
 
     console.warn($scope.userType, " ", $scope.mode, " ", $scope.pageId);
     $scope.asideState = {
@@ -75,7 +76,7 @@ angular.module('uilabApp')
     var vm = $scope;
 
 
-    vm.exampleTitle = 'Formly Form Live!'; // add this
+    vm.exampleTitle = 'Preview'; // add this
 
     vm.RawFieldCode = function () {
       $scope.isFormlyShowScope = true;

@@ -25,7 +25,8 @@ angular
     'ngFileUpload',
     'builder',
     'builder.components',
-    'validator.rules'
+    'validator.rules',
+    'string'
   ])
   .config(function ($routeProvider, toastrConfig) {
     $routeProvider

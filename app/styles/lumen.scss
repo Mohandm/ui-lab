@@ -586,7 +586,7 @@ button:active {
     color: #ffffff;
     -webkit-box-shadow: none;
     box-shadow: none;
-    z-index: 1000;
+    z-index: 1060;
 }
 .navbar-default .navbar-nav > .active > a {
     background-image: none;
@@ -2680,7 +2680,7 @@ table td:last-child {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1010;
+    z-index: 1100;
     display: none;
     max-width: 276px;
     padding: 1px;
@@ -3744,6 +3744,17 @@ a{
   margin-top: -4px;
 }
 
+.radio input[type="radio"].noMarginTop,
+.radio-inline input[type="radio"].noMarginTop,
+.checkbox input[type="checkbox"].noMarginTop,
+.checkbox-inline input[type="checkbox"].noMarginTop{
+  margin-top: 2px;
+}
+
 .components-panel .form-horizontal{
   background-color: lightgrey;
+}
+
+.marginForScopeViewButtons{
+  border : 2px solid blue;
 }
