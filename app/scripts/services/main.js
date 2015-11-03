@@ -29,6 +29,18 @@ angular.module('uilabApp')
       return deferred.promise;
     };
 
+    this.getFormMetaData   = function(pageId){
+      var deferred = $q.defer(),
+        actionUrl = 'json/formMetaData.json';
+      $http.get(actionUrl,{})
+        .success(function (json) {
+          deferred.resolve(json);
+        }).error(function(msg, code) {
+          deferred.reject(msg);
+          $log.error(msg, code);
+        });
+      return deferred.promise;
+    };
   })
   .factory('commonService', function () {
     function CDataWrap(value) {

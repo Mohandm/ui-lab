@@ -2707,16 +2707,16 @@ table td:last-child {
     margin-left: -10px;
 }
 .popover-title {
-    margin: 0;
-    padding: 8px 0;
-    margin: 0px 14px;
-    font-size: 16px;
-    font-weight: normal;
-    line-height: 18px;
-    background-color: #ffffff;
-    border-bottom: 1px solid #ebebeb;
-    border-radius: 0;
-    color: #666666;
+  margin: 0;
+  padding: 8px 5px;
+  margin: 0px 0px;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 18px;
+  background-color: #00afd8;
+  border-bottom: 1px solid #00afd8;
+  border-radius: 0;
+  color: white;
 }
 .popover-content {
     padding: 9px 14px;
@@ -3758,3 +3758,11 @@ a{
 .seperatorBorder{
   border : 2px solid #00afd8;
 }
+.footer{
+  margin:20px 0px;
+}
+.saveButton{
+  float: right;
+  margin-right: 20px;
+}
+

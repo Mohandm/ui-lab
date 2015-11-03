@@ -8,7 +8,9 @@
  * Controller of the uiLabApp
  */
 angular.module('uilabApp')
-  .controller('DesignerCtrl', function ($scope, $aside, string, MainService, toastr, $routeParams, formlyVersion, getOIMConfig,  $builder, $validator, $timeout, $location, constantData) {
+  .controller('DesignerCtrl', function ($scope, $aside, string, MainService, toastr, $routeParams, formlyVersion,
+                                        getOIMConfig,  $builder, $validator, $timeout, $location, constantData,
+                                        MetaDataMergeService) {
     var vm = $scope;
     vm.userType = $routeParams.userType;
     vm.mode = 'edit';
@@ -85,11 +87,17 @@ angular.module('uilabApp')
 
     };
 
+    var flagLoad = false;
+    var initialFields = [];
     vm.CopyForm = function () {
 
       vm.fields = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
       vm.model = getModel(vm.forms["default"]);
-
+      if(!flagLoad)
+      {
+        initialFields = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
+        flagLoad = true;
+      }
     };
 
     var saveForm = function (FormsValuePairs,successFunc)
@@ -114,7 +122,6 @@ angular.module('uilabApp')
         //check if it is not field
         if (field.noFormControl)
         {
-
           if (field.key)
             modelName = field.key;
           else
@@ -163,8 +170,7 @@ angular.module('uilabApp')
       var forms;
 
       //no design found, load default form design
-      //forms = constantData.defaultFormDesign;
-      forms = [];
+      forms = itemData || [];
       angular.forEach(forms, function (form, formName, obj) {
         //clear out existing form components
         clearForm(formName);
@@ -189,8 +195,17 @@ angular.module('uilabApp')
       //clear all forms first for back navigation button
       //$builder.forms = {};
       vm.forms = $builder.forms;
+      var itemData;
+      if(vm.userType === 'client')
+      {
+        itemData = MetaDataMergeService.mergeMetaData($scope.coreFormMetaData, $scope.clientFormMetaData);
+      }
+      else
+      {
+        itemData = $scope.coreFormMetaData;
+      }
 
-      var itemData = new Array();
+      //var itemData = constantData.defaultFormDesign;
       loadFormData(itemData);
       vm.$watch('forms', function (newValue, oldValue) {
 
@@ -209,30 +224,34 @@ angular.module('uilabApp')
 
       }, true);
     };
-    init();
 
-    var lhs = {
-      name: 'my object',
-      description: 'it\'s an object!',
-      details: {
-        it: 'has',
-        an: 'array',
-        with: ['a', 'few', 'elements']
+
+
+    var metaDataPromise = MainService.getFormMetaData($routeParams.pageId);
+    metaDataPromise.then(function(data){
+      if(data !== {})
+      {
+        $scope.formMetaData = data;
+        $scope.coreFormMetaData = data.core;
+        $scope.clientFormMetaData = data.client;
+        $scope.formDisplayMetaData = data.display;
+      }
+      init();
+    }, function(reason) {
+      toastr.error('Failed to Load MetaData');
+    });
+
+    vm.saveFormDesign = function(){
+      var finalFields = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
+      if(vm.userType === 'client')
+      {
+          var json = MetaDataMergeService.createFinalFormDesignerJSONToStore(initialFields, finalFields);
+          console.log(json);
+      }
+      else
+      {
+          var json = finalFields;
+          console.log(json);
       }
     };
-
-    var rhs = {
-      name: 'updated object',
-      description: 'it\'s an object!',
-      details: {
-        it: 'has',
-        an: 'array',
-        with: ['a', 'few', 'more', 'elements', { than: 'before' }]
-      }
-    };
-
-    var differences = DeepDiff(lhs, rhs);
-    console.log(differences);
-
-
   });

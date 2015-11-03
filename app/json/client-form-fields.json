@@ -1,0 +1,59 @@
+{ "core" : {
+  "default": [
+    {
+      "key": "ref_id",
+      "templateOptions": {
+        "required": true,
+        "label": "Reference Id"
+      },
+      "type": "input"
+    },
+    {
+      "key": "tnx_id",
+      "templateOptions": {
+        "required": true,
+        "label": "Transaction Id"
+      },
+      "type": "input"
+    },
+    {
+      "key": "bene_details",
+      "templateOptions": {
+        "required": false,
+        "label": "Beneficiary Details",
+        "fields": [
+          {
+            "key": "bene_name",
+            "templateOptions": {
+              "required": true,
+              "label": "Beneficiary Name"
+            },
+            "type": "input"
+          },
+          {
+            "key": "bene_address",
+            "templateOptions": {
+              "required": true,
+              "label": "Beneficiary Address"
+            },
+            "type": "input"
+          }
+        ]
+      },
+      "type": "multiField"
+    },
+    {
+      "key": "upload_access",
+      "templateOptions": {
+        "required": false,
+        "label": "Upload Access",
+        "placeholder": "placeholder",
+        "options": [
+          "Unlimited Access Allowed",
+          "Partial Access Allowed"
+        ]
+      },
+      "type": "checkBoxList"
+    }
+  ]
+}}

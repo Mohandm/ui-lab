@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img class="logo" src="images/Header_Misys_logo22px.png"></a>
+    <a class="navbar-brand" href="#/"><img class="logo" src="images/Header_Misys_logo22px.png"></a>
     <form class="navbar-form navbar-left" role="search">
       <div class="form-group">
         <input type="text" class="form-control" ng-model="pageName" placeholder="Add Page">
@@ -9,13 +9,15 @@
       </div>
     </form>
     <!-- /.container-fluid -->
+    <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Logout" data-placement="bottom" ng-click="logout()"><i class="fa fa-power-off"></i></a>
+    <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Save" data-placement="bottom" ng-click="saveFormDesign()"><i class="fa fa-floppy-o"></i></a>
     <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Preview" data-placement="bottom" ng-click="changeMode('preview')"><i class="fa fa-eye"></i></a>
     <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Edit" data-placement="bottom" ng-click="changeMode('edit')"><i class="fa fa-pencil-square-o"></i></a>
     <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Pages" data-placement="bottom" ng-click="openAside('left', true)"><i class="fa fa-server"></i></a>
 </nav>
 <div class="container-fluid">
   <div class="row" ng-show="mode === 'edit'">
-    <h2 style="margin-left: 15px;">Edit</h2>
+    <span><h2 style="margin-left: 15px;">Edit</h2></span>
     <hr>
     <div class="col-md-4">
       <div fb-components class="components-panel">
@@ -76,4 +78,5 @@
       <pre>{{rawFieldCode|json}}</pre>
     </div>
   </div>
+
 </div>
