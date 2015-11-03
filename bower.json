@@ -24,7 +24,8 @@
     "jquery-ui": "*",
     "placeholders": "*",
     "ng-file-upload": "*",
-    "underscore.string" : "*"
+    "underscore.string" : "*",
+    "deep-diff" : "*"
   },
   "devDependencies": {
     "angular-mocks": "1.4.7",

@@ -9,25 +9,26 @@
  */
 angular.module('uilabApp')
   .controller('DesignerCtrl', function ($scope, $aside, string, MainService, toastr, $routeParams, formlyVersion, getOIMConfig,  $builder, $validator, $timeout, $location, constantData) {
-    $scope.userType = $routeParams.userType;
-    $scope.mode = 'edit';
-    $scope.pageId = $routeParams.pageId;
-    $scope.pageName = string($scope.pageId).humanize().s;
+    var vm = $scope;
+    vm.userType = $routeParams.userType;
+    vm.mode = 'edit';
+    vm.pageId = $routeParams.pageId;
+    vm.pageName = string(vm.pageId).humanize().s;
 
-    console.warn($scope.userType, " ", $scope.mode, " ", $scope.pageId);
-    $scope.asideState = {
+    console.warn(vm.userType, " ", vm.mode, " ", vm.pageId);
+    vm.asideState = {
       open: false
     };
 
-    $scope.openAside = function(position, backdrop) {
+    vm.openAside = function(position, backdrop) {
 
       function postClose() {
-        $scope.asideState.open = false;
+        vm.asideState.open = false;
       }
 
-      if(!$scope.asideState.open)
+      if(!vm.asideState.open)
       {
-          $scope.asideState = {
+          vm.asideState = {
             open: true,
             position: position
           };
@@ -43,66 +44,68 @@ angular.module('uilabApp')
         }
       };
 
-    $scope.addPage = function(){
-      if($scope.pageName)
+    vm.addPage = function(){
+      if(vm.pageName)
       {
 
-        var pagesListPromise = MainService.addPage($scope.pageName);
+        var pagesListPromise = MainService.addPage(vm.pageName);
         pagesListPromise.then(function(data){
-          toastr.success("Page Added Successfully : ",$scope.pageName);
-          $scope.pageName = '';
-          $scope.openAside('left', true);
+          toastr.success("Page Added Successfully : ",vm.pageName);
+          vm.pageName = '';
+          vm.openAside('left', true);
         }, function(reason) {
-          toastr.error($scope.pageName, 'Failed to Add Page : ');
-          $scope.pageName = '';
-          $scope.openAside('left', true);
+          toastr.error(vm.pageName, 'Failed to Add Page : ');
+          vm.pageName = '';
+          vm.openAside('left', true);
         });
       }
     };
 
-    $scope.changeMode = function(mode){
+    vm.changeMode = function(mode){
       if(mode === 'preview')
       {
-        $scope.mode = 'preview';
+        vm.mode = 'preview';
       }
       else{
-        $scope.mode = 'edit';
+        vm.mode = 'edit';
       }
     };
 
     var listName = constantData.appFormDesignListName;
 
-
-    var vm = $scope;
-
-
     vm.exampleTitle = 'Preview'; // add this
 
     vm.RawFieldCode = function () {
-      $scope.isFormlyShowScope = true;
-      $scope.rawFieldCode=getOIMConfig.getOIMConfig($scope.forms["default"], $builder.forms);
+      vm.isFormlyShowScope = true;
+      vm.rawFieldCode=getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
     }
+
     vm.StartScratch = function () {
-      clearForms($scope.forms);
-
-    }
-    vm.CopyForm = function () {
-
-      vm.fields = getOIMConfig.getOIMConfig($scope.forms["default"], $builder.forms);
-      vm.model = getModel($scope.forms["default"]);
+      clearForms(vm.forms);
 
     };
+
+    vm.CopyForm = function () {
+
+      vm.fields = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
+      vm.model = getModel(vm.forms["default"]);
+
+    };
+
     var saveForm = function (FormsValuePairs,successFunc)
     {
 
-    }
+    };
+
     vm.PublishForm = function () {
 
 
-    }
+    };
+
     vm.SaveForm = function () {
 
-    }
+    };
+
     function getModel(form) {
       var obj_model = {};
       var modelName;
@@ -123,13 +126,13 @@ angular.module('uilabApp')
             //this is layout container
             {
               var containerId = field.id;
-              // obj_model[modelName]=getModel($scope.forms[containerId]);
+              // obj_model[modelName]=getModel(vm.forms[containerId]);
             }
             else
             {
               var containerId = field.id;
               obj_model[modelName] = [];
-              obj_model[modelName].push(getModel($scope.forms[containerId]));
+              obj_model[modelName].push(getModel(vm.forms[containerId]));
             }
           }
           else if (field.component === "checkbox") {
@@ -143,9 +146,6 @@ angular.module('uilabApp')
       return obj_model;
 
     }
-
-
-
 
     var getDesignForm = function()
     {
@@ -163,8 +163,8 @@ angular.module('uilabApp')
       var forms;
 
       //no design found, load default form design
-      forms = constantData.defaultFormDesign;
-
+      //forms = constantData.defaultFormDesign;
+      forms = [];
       angular.forEach(forms, function (form, formName, obj) {
         //clear out existing form components
         clearForm(formName);
@@ -172,11 +172,8 @@ angular.module('uilabApp')
           $builder.insertFormObject(formName, component.index, component);
         });
       });
+    };
 
-
-
-
-    }
     var clearForm = function (formName) {
       if ($builder.forms[formName])
         $builder.forms[formName].length=0;
@@ -186,15 +183,16 @@ angular.module('uilabApp')
       //});
 
     };
+
     var inProcess = false;
     var init = function () {
       //clear all forms first for back navigation button
       //$builder.forms = {};
-      $scope.forms = $builder.forms;
+      vm.forms = $builder.forms;
 
       var itemData = new Array();
       loadFormData(itemData);
-      $scope.$watch('forms', function (newValue, oldValue) {
+      vm.$watch('forms', function (newValue, oldValue) {
 
         if (!inProcess) {
           inProcess = true;
@@ -210,19 +208,31 @@ angular.module('uilabApp')
         }
 
       }, true);
-
-
-
-    }
-
-
-
-
+    };
     init();
 
+    var lhs = {
+      name: 'my object',
+      description: 'it\'s an object!',
+      details: {
+        it: 'has',
+        an: 'array',
+        with: ['a', 'few', 'elements']
+      }
+    };
 
+    var rhs = {
+      name: 'updated object',
+      description: 'it\'s an object!',
+      details: {
+        it: 'has',
+        an: 'array',
+        with: ['a', 'few', 'more', 'elements', { than: 'before' }]
+      }
+    };
 
-
+    var differences = DeepDiff(lhs, rhs);
+    console.log(differences);
 
 
   });

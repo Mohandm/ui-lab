@@ -13,17 +13,10 @@
     <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Edit" data-placement="bottom" ng-click="changeMode('edit')"><i class="fa fa-pencil-square-o"></i></a>
     <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Pages" data-placement="bottom" ng-click="openAside('left', true)"><i class="fa fa-server"></i></a>
 </nav>
-<div class="row">
-  <div class="col-2">
-
-  </div>
-  <div class="col-10">
-
-  </div>
-</div>
 <div class="container-fluid">
   <div class="row" ng-show="mode === 'edit'">
-    <hr />
+    <h2 style="margin-left: 15px;">Edit</h2>
+    <hr>
     <div class="col-md-4">
       <div fb-components class="components-panel">
 
@@ -38,7 +31,7 @@
           <h3 class="panel-title">{{pageName}}</h3>
         </div>
         <div fb-builder="default"></div>
-        <hr class="marginForScopeViewButtons">
+        <hr class="seperatorBorder">
         <div>
           <div class="checkbox">
             <label>
@@ -53,21 +46,17 @@
     </div>
   </div>
 
-
-
-
-
   <div style="z-index:1;background-color:white;position:relative" ng-show="mode === 'preview'" class="designer">
     <a href="{{SwitchView.link}}">{{SwitchView.text}}</a>
     <h2>{{exampleTitle}}</h2>
 
-    <hr />
+    <hr class="seperatorBorder">
     <div kcd-recompile="fields">
       <formly-form model="model" fields="fields" form="form1">
         <br />
         <br />
         <p>
-          <hr class="marginForScopeViewButtons">
+          <hr class="seperatorBorder">
           <button type="button" class="btn btn-primary" ng-click="RawFieldCode()">View Raw Code</button>
         </p>
       </formly-form>
@@ -87,3 +76,4 @@
       <pre>{{rawFieldCode|json}}</pre>
     </div>
   </div>
+</div>
