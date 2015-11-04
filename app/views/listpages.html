@@ -1,6 +1,6 @@
 <div class="listPages">
   <div class="ui-list-view-bordered" ui-list-view="page in pagesList">
-    <p ng-click="openPageDesigner(page.id)"><strong>{{ page.name }}</strong></p>
+    <p ng-click="openPageDesigner(page.$value)"><strong>{{ page.$value | stringHumanize}}</strong></p>
   </div>
   <!--<div>
     <button class="btn btn-primary" ng-click="ok($event)">OK</button>

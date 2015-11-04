@@ -36,43 +36,50 @@ angular.module('uilabApp')
       console.log("clientMetadata:", clientMetadata);
 
       var finalMergedMetaData = {};
-
-      angular.forEach(clientMetadata, function(clientValueArray, clientFormKey) {
-        var coreValueArray = coreMetadata[clientFormKey];
-        if(coreValueArray !== undefined)
-        {
+      if(!angular.equals({}, clientMetadata))
+      {
+        angular.forEach(clientMetadata, function(clientValueArray, clientFormKey) {
+          var coreValueArray = coreMetadata[clientFormKey];
+          if(coreValueArray !== undefined)
+          {
             finalMergedMetaData[clientFormKey] = {};
 
             var layoutOfComponents = [];
             angular.forEach(clientValueArray, function(componentValueObject, componentKey) {
-                layoutOfComponents.push(componentValueObject);
+              layoutOfComponents.push(componentValueObject);
             });
 
             angular.forEach(coreValueArray, function(coreComponentValueObject, coreComponentKey) {
-                var flagExistsClient = false;
-                angular.forEach(clientValueArray, function(componentValueObject, componentKey) {
-                    if(componentValueObject.id === coreComponentValueObject.id)
-                    {
-                      flagExistsClient = true;
-                    }
-                });
-                if(!flagExistsClient)
+              var flagExistsClient = false;
+              angular.forEach(clientValueArray, function(componentValueObject, componentKey) {
+                if(componentValueObject.id === coreComponentValueObject.id)
                 {
-                  var indexOfComponent = coreComponentValueObject.index;
-                  layoutOfComponents.insert(indexOfComponent, coreComponentValueObject);
+                  flagExistsClient = true;
                 }
+              });
+              if(!flagExistsClient)
+              {
+                var indexOfComponent = coreComponentValueObject.index;
+                layoutOfComponents.insert(indexOfComponent, coreComponentValueObject);
+              }
             });
 
-          angular.forEach(layoutOfComponents, function(component, index) {
+            angular.forEach(layoutOfComponents, function(component, index) {
               component.index = index;
-          });
-          finalMergedMetaData[clientFormKey] = layoutOfComponents;
-        }
-        else
-        {
-          finalMergedMetaData[clientFormKey] = clientValueArray;
-        }
-      });
+            });
+            finalMergedMetaData[clientFormKey] = layoutOfComponents;
+          }
+          else
+          {
+            finalMergedMetaData[clientFormKey] = clientValueArray;
+          }
+        });
+      }
+      else
+      {
+        finalMergedMetaData = coreMetadata;
+      }
+
 
       console.log('finalMergedMetaData', finalMergedMetaData);
       return finalMergedMetaData;

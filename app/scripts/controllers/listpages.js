@@ -4,10 +4,7 @@ angular.module('uilabApp')
   .controller('ListpagesController', function ($scope, $modalInstance, MainService, $location, $routeParams) {
       $scope.userType = $routeParams.userType;
 
-      var pagesListPromise = MainService.getPagesList();
-      pagesListPromise.then(function(data){
-        $scope.pagesList = data.pagesList;
-      });
+    $scope.pagesList = MainService.getPagesList();
 
       $scope.openPageDesigner = function(pageId){
         $location.path('/designer/' + $scope.userType +'/'+ pageId);

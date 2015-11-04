@@ -21,7 +21,7 @@ angular.module('uilabApp')
       vm.showDesigner = true;
     }
 
-    vm.pageName = string(vm.pageId).humanize().s;
+    vm.pageName = vm.pageId;
 
     console.warn(vm.userType, " ", vm.mode, " ", vm.pageId);
     vm.asideState = {
@@ -56,7 +56,7 @@ angular.module('uilabApp')
       if(vm.pageName)
       {
 
-        var pagesListPromise = MainService.addPage(vm.pageName);
+        var pagesListPromise = MainService.addPage({},vm.pageName);
         pagesListPromise.then(function(data){
           toastr.success("Page Added Successfully : ",vm.pageName);
           vm.pageName = '';
@@ -83,208 +83,203 @@ angular.module('uilabApp')
       $location.path('/');
     };
 
-    var listName = constantData.appFormDesignListName;
+    if($routeParams.pageId) {
+      var listName = constantData.appFormDesignListName;
 
-    vm.exampleTitle = 'Preview'; // add this
+      vm.exampleTitle = 'Preview'; // add this
 
-    vm.RawFieldCode = function () {
-      vm.isFormlyShowScope = true;
-      vm.rawFieldCode=getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
-    }
-
-    vm.StartScratch = function () {
-      clearForms(vm.forms);
-
-    };
-
-    var flagLoad = false;
-    var initialFields = [];
-    vm.CopyForm = function () {
-      //console.log('Fields :', getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms));
-      vm.fields = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
-      vm.model = getModel(vm.forms["default"]);
-      if(!flagLoad)
-      {
-        initialFields = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
-        flagLoad = true;
+      vm.RawFieldCode = function () {
+        vm.isFormlyShowScope = true;
+        vm.rawFieldCode = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
       }
-    };
 
-    var saveForm = function (FormsValuePairs,successFunc)
-    {
+      vm.StartScratch = function () {
+        clearForms(vm.forms);
 
-    };
+      };
 
-    vm.PublishForm = function () {
+      var flagLoad = false;
+      var initialFields = [];
+      vm.CopyForm = function () {
+        //console.log('Fields :', getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms));
+        vm.fields = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
+        vm.model = getModel(vm.forms["default"]);
+        if (!flagLoad) {
+          initialFields = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
+          flagLoad = true;
+        }
+      };
+
+      var saveForm = function (FormsValuePairs, successFunc) {
+
+      };
+
+      vm.PublishForm = function () {
 
 
-    };
+      };
 
-    vm.SaveForm = function () {
+      vm.SaveForm = function () {
 
-    };
+      };
 
-    function getModel(form) {
-      var obj_model = {};
-      var modelName;
+      function getModel(form) {
+        var obj_model = {};
+        var modelName;
 
-      angular.forEach(form, function (field) {
-        //check if it is not field
-        if (field.noFormControl)
-        {
-          if (field.key)
-            modelName = field.key;
-          else
-            modelName = field.id;
-          if (field.hasOwnProperty("isContainer") && field["isContainer"])
-          //this is an container field
-          {
-            if (field.hasOwnProperty("component") && field["component"] === "multiField")
-            //this is layout container
-            {
-              var containerId = field.id;
-              // obj_model[modelName]=getModel(vm.forms[containerId]);
-            }
+        angular.forEach(form, function (field) {
+          //check if it is not field
+          if (field.noFormControl) {
+            if (field.key)
+              modelName = field.key;
             else
+              modelName = field.id;
+            if (field.hasOwnProperty("isContainer") && field["isContainer"])
+            //this is an container field
             {
-              var containerId = field.id;
+              if (field.hasOwnProperty("component") && field["component"] === "multiField")
+              //this is layout container
+              {
+                var containerId = field.id;
+                // obj_model[modelName]=getModel(vm.forms[containerId]);
+              }
+              else {
+                var containerId = field.id;
+                obj_model[modelName] = [];
+                obj_model[modelName].push(getModel(vm.forms[containerId]));
+              }
+            }
+            else if (field.component === "checkbox") {
               obj_model[modelName] = [];
-              obj_model[modelName].push(getModel(vm.forms[containerId]));
+            }
+            else {
+              obj_model[modelName] = '';
             }
           }
-          else if (field.component === "checkbox") {
-            obj_model[modelName] = [];
-          }
-          else {
-            obj_model[modelName] = '';
-          }
-        }
-      });
-      return obj_model;
-
-    }
-
-    var getDesignForm = function()
-    {
-
-
-    }
-
-    function clearForms(forms) {
-      angular.forEach(forms, function (form, formName, obj) {
-        //clear out existing form components
-        clearForm(formName);
-      });
-    }
-    var loadFormData = function (itemData) {
-      var forms;
-
-      //no design found, load default form design
-      forms = itemData || [];
-      angular.forEach(forms, function (form, formName, obj) {
-        //clear out existing form components
-        clearForm(formName);
-        angular.forEach(form, function (component) {
-          $builder.insertFormObject(formName, component.index, component);
         });
-      });
-    };
+        return obj_model;
 
-    var clearForm = function (formName) {
-      if ($builder.forms[formName])
-        $builder.forms[formName].length=0;
-      // existForm.length = 0;
-      //angular.forEach(existForm, function (component) {
-      //    $builder.removeFormObject(formName, 0);
-      //});
-
-    };
-
-    var inProcess = false;
-    var init = function () {
-      //clear all forms first for back navigation button
-      //$builder.forms = {};
-      vm.forms = $builder.forms;
-      var itemData;
-      if(vm.userType === 'client')
-      {
-        itemData = MetaDataMergeService.mergeMetaData($scope.coreFormMetaData, $scope.clientFormMetaData);
-      }
-      else
-      {
-        itemData = $scope.coreFormMetaData;
       }
 
-      //var itemData = constantData.defaultFormDesign;
-      loadFormData(itemData);
-      vm.$watch('forms', function (newValue, oldValue) {
+      var getDesignForm = function () {
 
-        if (!inProcess) {
-          inProcess = true;
-          $timeout(function () {
-            try {
-              vm.CopyForm();
-            }
-            catch (e) {
-              console.log(e);
-            }
-            inProcess = false;
-          }, 1000);
+
+      }
+
+      var clearForms = function (forms) {
+        angular.forEach(forms, function (form, formName, obj) {
+          //clear out existing form components
+          clearForm(formName);
+        });
+      };
+
+      var loadFormData = function (itemData) {
+        var forms;
+
+        //no design found, load default form design
+        forms = itemData || [];
+        angular.forEach(forms, function (form, formName, obj) {
+          //clear out existing form components
+          clearForm(formName);
+          angular.forEach(form, function (component) {
+            $builder.insertFormObject(formName, component.index, component);
+          });
+        });
+      };
+
+      var clearForm = function (formName) {
+        if ($builder.forms[formName])
+          $builder.forms[formName].length = 0;
+        // existForm.length = 0;
+        //angular.forEach(existForm, function (component) {
+        //    $builder.removeFormObject(formName, 0);
+        //});
+
+      };
+
+      var inProcess = false;
+      var init = function () {
+        //clear all forms first for back navigation button
+        //$builder.forms = {};
+        vm.forms = $builder.forms;
+        var itemData;
+        if (vm.userType === 'client') {
+          itemData = MetaDataMergeService.mergeMetaData($scope.coreFormMetaData, $scope.clientFormMetaData);
+        }
+        else {
+          itemData = $scope.coreFormMetaData;
         }
 
-      }, true);
-    };
+        //var itemData = constantData.defaultFormDesign;
+        loadFormData(itemData);
+        vm.$watch('forms', function (newValue, oldValue) {
+
+          if (!inProcess) {
+            inProcess = true;
+            $timeout(function () {
+              try {
+                vm.CopyForm();
+              }
+              catch (e) {
+                console.log(e);
+              }
+              inProcess = false;
+            }, 1000);
+          }
+
+        }, true);
+      };
 
 
+      var metaDataPromise = MainService.getFormMetaData($routeParams.pageId);
+      metaDataPromise.then(function (data) {
+        if (data !== undefined && data !== {}) {
+          data = JSON.parse(data);
+          $scope.formMetaData = data;
+          $scope.coreFormMetaData = data.core;
+          $scope.initialCoreFormMetaData = angular.copy($scope.coreFormMetaData);
+          $scope.clientFormMetaData = data.client;
+          $scope.initialClientFormMetaData = angular.copy($scope.clientFormMetaData);
+          $scope.formDisplayMetaData = data.display;
+        }
+        init();
+      }, function (reason) {
+        toastr.error('Failed to Load MetaData');
+      });
 
-    var metaDataPromise = MainService.getFormMetaData($routeParams.pageId);
-    metaDataPromise.then(function(data){
-      if(data !== {})
-      {
-        $scope.formMetaData = data;
-        $scope.coreFormMetaData = data.core;
-        $scope.initialCoreFormMetaData = angular.copy($scope.coreFormMetaData);
-        $scope.clientFormMetaData = data.client;
-        $scope.initialClientFormMetaData = angular.copy($scope.clientFormMetaData);
-        $scope.formDisplayMetaData = data.display;
-      }
-      init();
-    }, function(reason) {
-      toastr.error('Failed to Load MetaData');
-    });
-
-    var finalJSON = {
-      core : {},
-      client : {},
-      display : []
-    };
-    vm.saveFormDesign = function(){
-      if(vm.userType === 'client')
-      {
+      var finalJSON = {
+        core: {},
+        client: {},
+        display: []
+      };
+      vm.saveFormDesign = function () {
+        if (vm.userType === 'client') {
           console.log('Client');
           finalJSON.core = $scope.initialCoreFormMetaData;
           finalJSON.client = MetaDataMergeService.createJSONFromChangeSet($scope.coreFormMetaData, $builder.forms);
           finalJSON.display = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
           console.log(JSON.stringify(finalJSON));
           console.log(finalJSON);
-          toastr.success('Form Design has been successfully saved');
-      }
-      else
-      {
-        console.log('Core');
-        finalJSON.core = $builder.forms;
-        if($scope.initialClientFormMetaData)
-        {
-          finalJSON.client = $scope.initialClientFormMetaData;
         }
-        else
-        {
-          finalJSON.client = {};
+        else {
+          console.log('Core');
+          finalJSON.core = $builder.forms;
+          if ($scope.initialClientFormMetaData) {
+            finalJSON.client = $scope.initialClientFormMetaData;
+          }
+          else {
+            finalJSON.client = {};
+          }
+          finalJSON.display = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
+          console.log(JSON.stringify(finalJSON));
+          console.log(finalJSON);
         }
-        finalJSON.display = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
-        console.log(JSON.stringify(finalJSON));
-        console.log(finalJSON);
-        toastr.success('Form Design has been successfully saved');
-      }
-    };
+        var savePagePromise = MainService.savePage(finalJSON, vm.pageName);
+        savePagePromise.then(function (data) {
+          toastr.success("Page Saved Successfully : ", vm.pageName);
+        }, function (reason) {
+          toastr.error(vm.pageName, 'Failed to Save Page : ');
+        });
+      };
+    }
   });
