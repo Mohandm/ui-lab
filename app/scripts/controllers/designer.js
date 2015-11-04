@@ -100,7 +100,7 @@ angular.module('uilabApp')
     var flagLoad = false;
     var initialFields = [];
     vm.CopyForm = function () {
-
+      //console.log('Fields :', getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms));
       vm.fields = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
       vm.model = getModel(vm.forms["default"]);
       if(!flagLoad)
