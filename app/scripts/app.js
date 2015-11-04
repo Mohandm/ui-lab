@@ -26,7 +26,8 @@ angular
     'builder',
     'builder.components',
     'validator.rules',
-    'string'
+    'string',
+    'firebase'
   ])
   .config(function ($routeProvider, toastrConfig) {
     $routeProvider

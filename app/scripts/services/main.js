@@ -32,6 +32,7 @@ angular.module('uilabApp')
     this.getFormMetaData   = function(pageId){
       var deferred = $q.defer(),
         actionUrl = 'json/formMetaData.json';
+      //actionUrl = 'json/emptyMetaData.json';
       $http.get(actionUrl,{})
         .success(function (json) {
           deferred.resolve(json);

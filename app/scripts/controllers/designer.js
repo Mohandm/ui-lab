@@ -15,6 +15,12 @@ angular.module('uilabApp')
     vm.userType = $routeParams.userType;
     vm.mode = 'edit';
     vm.pageId = $routeParams.pageId;
+    vm.showDesigner = false;
+    if($routeParams.pageId)
+    {
+      vm.showDesigner = true;
+    }
+
     vm.pageName = string(vm.pageId).humanize().s;
 
     console.warn(vm.userType, " ", vm.mode, " ", vm.pageId);
@@ -71,6 +77,10 @@ angular.module('uilabApp')
       else{
         vm.mode = 'edit';
       }
+    };
+
+    vm.logout = function(){
+      $location.path('/');
     };
 
     var listName = constantData.appFormDesignListName;
@@ -241,17 +251,26 @@ angular.module('uilabApp')
       toastr.error('Failed to Load MetaData');
     });
 
+    var finalJSON = {
+      core : {},
+      client : {},
+      display : []
+    };
     vm.saveFormDesign = function(){
-      var finalFields = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
       if(vm.userType === 'client')
       {
-          var json = MetaDataMergeService.createFinalFormDesignerJSONToStore(initialFields, finalFields);
-          console.log(json);
+          finalJSON.core = $scope.coreFormMetaData;
+          finalJSON.client = MetaDataMergeService.createJSONFromChangeSet($scope.coreFormMetaData, $builder.forms);
+          finalJSON.display = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
+          console.log(JSON.stringify(finalJSON));
+          toastr.success('Form Design has been successfully saved');
       }
       else
       {
-          var json = finalFields;
-          console.log(json);
+        finalJSON.core = $builder.forms;
+        finalJSON.display = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
+        console.log(JSON.stringify(finalJSON));
+        toastr.success('Form Design has been successfully saved');
       }
     };
   });

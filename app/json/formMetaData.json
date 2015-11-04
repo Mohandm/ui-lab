@@ -358,31 +358,12 @@
   "client": {
     "default-multiField-6745": [
       {
-        "key": "RefNo",
-        "component": "textInput",
-        "editable": true,
-        "index": 0,
-        "label": "Reference:",
-        "description": "description",
-        "placeholder": "placeholder",
-        "options": [],
-        "required": true,
-        "validation": "[number]",
-        "id": "default-multiField-6745-textInput-4226",
-        "isContainer": false,
-        "templateOptions": {
-          "listFieldName": "Title"
-        },
-        "expressionProperties": "",
-        "noFormControl": true
-      },
-      {
         "key": "date",
         "component": "datePicker",
         "editable": true,
         "index": 1,
         "label": "",
-        "description": "",
+        "description": "Date Guru:",
         "placeholder": "",
         "options": [],
         "required": true,
@@ -397,7 +378,7 @@
         "expressionProperties": "",
         "noFormControl": true
       }
-    ]
+      ]
   },
   "display": [
 

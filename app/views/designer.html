@@ -15,7 +15,7 @@
     <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Edit" data-placement="bottom" ng-click="changeMode('edit')"><i class="fa fa-pencil-square-o"></i></a>
     <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Pages" data-placement="bottom" ng-click="openAside('left', true)"><i class="fa fa-server"></i></a>
 </nav>
-<div class="container-fluid">
+<div class="container-fluid" ng-show="showDesigner">
   <div class="row" ng-show="mode === 'edit'">
     <span><h2 style="margin-left: 15px;">Edit</h2></span>
     <hr>
