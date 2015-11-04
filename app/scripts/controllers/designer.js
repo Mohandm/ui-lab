@@ -266,15 +266,24 @@ angular.module('uilabApp')
           finalJSON.client = MetaDataMergeService.createJSONFromChangeSet($scope.coreFormMetaData, $builder.forms);
           finalJSON.display = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
           console.log(JSON.stringify(finalJSON));
+          console.log(finalJSON);
           toastr.success('Form Design has been successfully saved');
       }
       else
       {
         console.log('Core');
         finalJSON.core = $builder.forms;
-        finalJSON.client = $scope.initialClientFormMetaData;
+        if($scope.initialClientFormMetaData)
+        {
+          finalJSON.client = $scope.initialClientFormMetaData;
+        }
+        else
+        {
+          finalJSON.client = {};
+        }
         finalJSON.display = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
         console.log(JSON.stringify(finalJSON));
+        console.log(finalJSON);
         toastr.success('Form Design has been successfully saved');
       }
     };

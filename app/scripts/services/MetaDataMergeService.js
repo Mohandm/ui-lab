@@ -7,7 +7,6 @@ angular.module('uilabApp')
       //console.log("Final:", finalMetadata);
       var finalChangeSet = {};
       DeepDiff.observableDiff(initialMetadata, finalMetadata, function(diffNode){
-        // Apply all changes except those to the 'name' property...
         /*console.log("Kind of Diff:", diffNode.kind);
         console.log("path of Diff:", diffNode.path);
         console.log("Diff : ", diffNode);
@@ -33,18 +32,50 @@ angular.module('uilabApp')
     };
 
     this.mergeMetaData = function(coreMetadata, clientMetadata){
-      //var formData = angular.fromJson(response.data);
-      DeepDiff.observableDiff(coreMetadata, clientMetadata, function(diffNode){
-        // Apply all changes except those to the 'name' property...
-        console.log("Kind of Diff:", diffNode.kind);
-        console.log("path of Diff:", diffNode.path);
-        console.log("Diff : ", diffNode);
-        if (diffNode.kind !== 'D') {
-          DeepDiff.applyChange(coreMetadata, clientMetadata, diffNode);
+      console.log("coreMetadata:", coreMetadata);
+      console.log("clientMetadata:", clientMetadata);
+
+      var finalMergedMetaData = {};
+
+      angular.forEach(clientMetadata, function(clientValueArray, clientFormKey) {
+        var coreValueArray = coreMetadata[clientFormKey];
+        if(coreValueArray !== undefined)
+        {
+            finalMergedMetaData[clientFormKey] = {};
+
+            var layoutOfComponents = [];
+            angular.forEach(clientValueArray, function(componentValueObject, componentKey) {
+                layoutOfComponents.push(componentValueObject);
+            });
+
+            angular.forEach(coreValueArray, function(coreComponentValueObject, coreComponentKey) {
+                var flagExistsClient = false;
+                angular.forEach(clientValueArray, function(componentValueObject, componentKey) {
+                    if(componentValueObject.id === coreComponentValueObject.id)
+                    {
+                      flagExistsClient = true;
+                    }
+                });
+                if(!flagExistsClient)
+                {
+                  var indexOfComponent = coreComponentValueObject.index;
+                  layoutOfComponents.insert(indexOfComponent, coreComponentValueObject);
+                }
+            });
+
+          angular.forEach(layoutOfComponents, function(component, index) {
+              component.index = index;
+          });
+          finalMergedMetaData[clientFormKey] = layoutOfComponents;
+        }
+        else
+        {
+          finalMergedMetaData[clientFormKey] = clientValueArray;
         }
       });
 
-      return coreMetadata;
+      console.log('finalMergedMetaData', finalMergedMetaData);
+      return finalMergedMetaData;
     };
 
 

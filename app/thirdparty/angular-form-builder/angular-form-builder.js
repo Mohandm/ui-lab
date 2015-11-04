@@ -35,7 +35,7 @@
               var component;
               copyObjectToScope(formObject, $scope);
               $scope.optionsText = formObject.options.join('\n');
-              $scope.$watch('[key,label, description, placeholder, required, options, validation,templateOptions,expressionProperties]', function () {
+              $scope.$watch('[key,label, description, placeholder, required, options, validation,templateOptions,expressionProperties, modified]', function () {
                   formObject.key = $scope.key;
                   formObject.label = $scope.label;
                   formObject.description = $scope.description;
@@ -44,7 +44,7 @@
                   formObject.options = $scope.options;
                   formObject.templateOptions = $scope.templateOptions;
                   formObject.expressionProperties = $scope.expressionProperties;
-
+                  formObject.modified = $scope.modified;
 
                   return formObject.validation = $scope.validation;
               }, true);
@@ -85,7 +85,8 @@
                       validation: $scope.validation,
                       key: $scope.key,
                       templateOptions: $scope.templateOptions,
-                      expressionProperties: $scope.expressionProperties
+                      expressionProperties: $scope.expressionProperties,
+                      modified: $scope.modified
                   };
               },
               rollback: function () {
@@ -104,7 +105,7 @@
                   $scope.key = this.model.key;
                   $scope.templateOptions = this.model.templateOptions;
                   $scope.expressionProperties = this.model.expressionProperties;
-
+                  $scope.modified = this.model.modified;
                   return $scope.validation = this.model.validation;
               }
           };
@@ -1199,7 +1200,7 @@
             "default": []
         };
         this.convertComponent = function (name, component) {
-            var result, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,_ref10,_ref11,_ref12,_ref13;
+            var result, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,_ref10,_ref11,_ref12,_ref13, _ref14;
             result = {
                 name: name,
                 group: (_ref = component.group) != null ? _ref : 'Default',
@@ -1219,7 +1220,8 @@
                 isContainer: (_ref10 = component.isContainer) != null ? _ref10 : false,
                 templateOptions: (_ref11 = component.templateOptions) != null ? _ref11 : {},
                 expressionProperties: (_ref12 = component.expressionProperties) != null ? _ref12 : "",
-                noFormControl: (_ref13 = component.noFormControl)!=null?_ref13:true
+                noFormControl: (_ref13 = component.noFormControl)!=null?_ref13:true,
+                modified: (_ref14 = component.modified) != null ? _ref14 : false
             };
             if (!result.template && !result.templateUrl) {
                 console.error("The template is empty.");
@@ -1230,7 +1232,7 @@
             return result;
         };
         this.convertFormObject = function (name, formObject) {
-            var component, result, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9, _ref10, _ref11, _ref12;
+            var component, result, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9, _ref10, _ref11, _ref12, _ref13;
 
             if (formObject == null) {
                 formObject = {};
@@ -1255,9 +1257,8 @@
                 isContainer: (_ref8 = formObject.isContainer) != null ? _ref8 : component.isContainer,
                 templateOptions: (_ref10 = formObject.templateOptions) != null ? _ref10 : component.templateOptions,
                 expressionProperties: (_ref11 = formObject.expressionProperties) != null ? _ref11 : component.expressionProperties,
-                noFormControl: (_ref12 = formObject.noFormControl) != null ? _ref12 : component.noFormControl
-
-
+                noFormControl: (_ref12 = formObject.noFormControl) != null ? _ref12 : component.noFormControl,
+                modified: (_ref13 = formObject.modified) != null ? _ref13 : component.modified
             };
             return result;
         };
