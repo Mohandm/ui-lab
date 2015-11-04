@@ -11,7 +11,7 @@ angular.module('uilabApp')
         console.log("path of Diff:", diffNode.path);
         console.log("Diff : ", diffNode);
         console.log(diffNode.path.indexOf('$$hashKey'));*/
-        if(diffNode.kind === 'N' && diffNode.path.indexOf('$$hashKey') !== -1)
+        if(diffNode.kind === 'N' && diffNode.path && diffNode.path.indexOf('$$hashKey') !== -1)
         {
           //Do Nothing
           //console.log('entered Do Nothing');

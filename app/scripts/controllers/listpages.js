@@ -9,6 +9,7 @@ angular.module('uilabApp')
       $scope.openPageDesigner = function(pageId){
         $location.path('/designer/' + $scope.userType +'/'+ pageId);
         $modalInstance.close();
+        window.location.reload();
       };
 
       /*$scope.ok = function(e) {

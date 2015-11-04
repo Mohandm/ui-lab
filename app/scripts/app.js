@@ -25,6 +25,7 @@ angular
     'ngFileUpload',
     'builder',
     'builder.components',
+    'validator',
     'validator.rules',
     'string',
     'firebase'

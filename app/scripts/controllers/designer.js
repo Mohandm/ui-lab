@@ -23,7 +23,6 @@ angular.module('uilabApp')
 
     vm.pageName = vm.pageId;
 
-    console.warn(vm.userType, " ", vm.mode, " ", vm.pageId);
     vm.asideState = {
       open: false
     };
