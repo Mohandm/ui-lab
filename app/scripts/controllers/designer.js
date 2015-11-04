@@ -243,7 +243,9 @@ angular.module('uilabApp')
       {
         $scope.formMetaData = data;
         $scope.coreFormMetaData = data.core;
+        $scope.initialCoreFormMetaData = angular.copy($scope.coreFormMetaData);
         $scope.clientFormMetaData = data.client;
+        $scope.initialClientFormMetaData = angular.copy($scope.clientFormMetaData);
         $scope.formDisplayMetaData = data.display;
       }
       init();
@@ -259,7 +261,8 @@ angular.module('uilabApp')
     vm.saveFormDesign = function(){
       if(vm.userType === 'client')
       {
-          finalJSON.core = $scope.coreFormMetaData;
+          console.log('Client');
+          finalJSON.core = $scope.initialCoreFormMetaData;
           finalJSON.client = MetaDataMergeService.createJSONFromChangeSet($scope.coreFormMetaData, $builder.forms);
           finalJSON.display = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
           console.log(JSON.stringify(finalJSON));
@@ -267,7 +270,9 @@ angular.module('uilabApp')
       }
       else
       {
+        console.log('Core');
         finalJSON.core = $builder.forms;
+        finalJSON.client = $scope.initialClientFormMetaData;
         finalJSON.display = getOIMConfig.getOIMConfig(vm.forms["default"], $builder.forms);
         console.log(JSON.stringify(finalJSON));
         toastr.success('Form Design has been successfully saved');
