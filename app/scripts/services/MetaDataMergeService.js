@@ -36,6 +36,7 @@ angular.module('uilabApp')
       console.log("clientMetadata:", clientMetadata);
 
       var finalMergedMetaData = {};
+      finalMergedMetaData = coreMetadata;
       if(!angular.equals({}, clientMetadata))
       {
         angular.forEach(clientMetadata, function(clientValueArray, clientFormKey) {
@@ -75,11 +76,6 @@ angular.module('uilabApp')
           }
         });
       }
-      else
-      {
-        finalMergedMetaData = coreMetadata;
-      }
-
 
       console.log('finalMergedMetaData', finalMergedMetaData);
       return finalMergedMetaData;
