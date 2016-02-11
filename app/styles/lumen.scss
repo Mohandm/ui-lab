@@ -586,7 +586,7 @@ button:active {
     color: #ffffff;
     -webkit-box-shadow: none;
     box-shadow: none;
-    z-index: 2000;
+    z-index: 1060;
 }
 .navbar-default .navbar-nav > .active > a {
     background-image: none;
@@ -1709,7 +1709,7 @@ table .checkbox,
 .input-group .checkbox input[type="checkbox"],
 table .checkbox input[type="checkbox"],
 .modal .checkbox input[type="checkbox"] {
-    display: none;
+    /*display: none;*/
 }
 .form-group .checkbox input[type="checkbox"] + label:before,
 .input-group .checkbox input[type="checkbox"] + label:before,
@@ -1750,7 +1750,7 @@ table .radio,
 .input-group .radio input[type="radio"],
 table .radio input[type="radio"],
 .modal .radio input[type="radio"] {
-    display: none;
+    /*display: none;*/
 }
 .form-group .radio input[type="radio"] + label:before,
 .input-group .radio input[type="radio"] + label:before,
@@ -2680,7 +2680,7 @@ table td:last-child {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1010;
+    z-index: 1100;
     display: none;
     max-width: 276px;
     padding: 1px;
@@ -2707,19 +2707,20 @@ table td:last-child {
     margin-left: -10px;
 }
 .popover-title {
-    margin: 0;
-    padding: 8px 0;
-    margin: 0px 14px;
-    font-size: 16px;
-    font-weight: normal;
-    line-height: 18px;
-    background-color: #ffffff;
-    border-bottom: 1px solid #ebebeb;
-    border-radius: 0;
-    color: #666666;
+  margin: 0;
+  padding: 8px 5px;
+  margin: 0px 0px;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 18px;
+  background-color: #00afd8;
+  border-bottom: 1px solid #00afd8;
+  border-radius: 0;
+  color: white;
 }
 .popover-content {
     padding: 9px 14px;
+    background-color: lightblue;
 }
 .popover .arrow,
 .popover .arrow:after {
@@ -3706,3 +3707,62 @@ a.list-group-item.active > .badge,
 .ng-aside .modal-content {
   min-width: 320px;
 }
+
+.listPages{
+  padding-top: 50px;
+}
+
+.listPages .ui-list-view-bordered{
+  height:700px;
+}
+
+a{
+  cursor: pointer;
+}
+.listPages .ui-list-view-bordered > .ui-list-view-cell{
+  cursor: pointer;
+}
+.listPages .ui-list-view-bordered > .ui-list-view-cell:hover{
+  background-color: lightgrey;
+}
+.drop-box {
+  background: #F8F8F8;
+  border: 5px dashed #DDD;
+  width: 200px;
+  height: 65px;
+  text-align: center;
+  padding-top: 25px;
+  margin: 10px;
+}
+.dragover {
+  border: 5px dashed blue;
+}
+.designer .radio input[type="radio"],
+.designer .radio-inline input[type="radio"],
+.designer .checkbox input[type="checkbox"],
+.designer .checkbox-inline input[type="checkbox"]{
+  margin-top: -4px;
+}
+
+.radio input[type="radio"].noMarginTop,
+.radio-inline input[type="radio"].noMarginTop,
+.checkbox input[type="checkbox"].noMarginTop,
+.checkbox-inline input[type="checkbox"].noMarginTop{
+  margin-top: 2px;
+}
+
+.components-panel .form-horizontal{
+  background-color: lightgrey;
+}
+
+.seperatorBorder{
+  border : 2px solid #00afd8;
+}
+.footer{
+  margin:20px 0px;
+}
+.saveButton{
+  float: right;
+  margin-right: 20px;
+}
+

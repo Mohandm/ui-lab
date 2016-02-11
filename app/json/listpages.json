@@ -1,0 +1,12 @@
+{"pagesList": [
+  {"id" : "initiateLC",
+   "name" : "Initiate Letter of Credit"},
+  {"id" : "initiateFT",
+    "name" : "Initiate FundTransfer"},
+  {"id" : "initiateBG",
+    "name" : "Initiate Bankers Guarantee"},
+  {"id" : "createUser",
+    "name" : "Create User"},
+  {"id" : "createParty",
+    "name" : "Create Party"}
+]}

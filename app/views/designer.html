@@ -1,24 +1,81 @@
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img class="logo" src="images/Header_Misys_logo22px.png"></a>
+    <a class="navbar-brand" href="#/"><img class="logo" src="images/Header_Misys_logo22px.png"></a>
     <form class="navbar-form navbar-left" role="search">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Add Page">
-        <div class= "magnifier">
-          <a class="header-icon"><i class="fa fa-plus"></i></a>
-        </div>
+        <input type="text" class="form-control" ng-model="pageName" placeholder="Add Page">
+        <a class="magnifier header-icon" ng-click="addPage()"><i class="fa fa-plus"></i></a>
+
       </div>
     </form>
     <!-- /.container-fluid -->
-    <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Preview" data-placement="bottom"><i class="fa fa-eye"></i></a>
-    <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Edit" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>
+    <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Logout" data-placement="bottom" ng-click="logout()"><i class="fa fa-power-off"></i></a>
+    <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Save" data-placement="bottom" ng-click="saveFormDesign()"><i class="fa fa-floppy-o"></i></a>
+    <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Preview" data-placement="bottom" ng-click="changeMode('preview')"><i class="fa fa-eye"></i></a>
+    <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Edit" data-placement="bottom" ng-click="changeMode('edit')"><i class="fa fa-pencil-square-o"></i></a>
     <a class="pull-right header-icon right-header-icons" data-toggle="tooltip" title="Pages" data-placement="bottom" ng-click="openAside('left', true)"><i class="fa fa-server"></i></a>
 </nav>
-<div class="row">
-  <div class="col-2">
+<div class="container-fluid" ng-show="showDesigner">
+  <div class="row" ng-show="mode === 'edit'">
+    <span><h2 style="margin-left: 15px;">Edit</h2></span>
+    <hr>
+    <div class="col-md-4">
+      <div fb-components class="components-panel">
 
-  </div>
-  <div class="col-10">
+      </div>
+    </div>
+    <div class="col-md-8 designer">
+      <p>
+        <button type="button" class="btn btn-primary" ng-click="StartScratch()">Start From Scratch</button>
+      </p>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+        <div fb-builder="default"></div>
+        <hr class="seperatorBorder">
+        <div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" class="noMarginTop" ng-model="isShowScope" />
+              Show scope
+            </label>
+          </div>
+          <pre ng-if="isShowScope">{{forms| json}}</pre>
+        </div>
 
+      </div>
+    </div>
   </div>
+
+  <div style="z-index:1;background-color:white;position:relative" ng-show="mode === 'preview'" class="designer">
+    <a href="{{SwitchView.link}}">{{SwitchView.text}}</a>
+    <h2>{{exampleTitle}}</h2>
+
+    <hr class="seperatorBorder">
+    <div kcd-recompile="fields">
+      <formly-form model="model" fields="fields" form="form1">
+        <br />
+        <br />
+        <p>
+          <hr class="seperatorBorder">
+          <button type="button" class="btn btn-primary" ng-click="RawFieldCode()">View Raw Code</button>
+        </p>
+      </formly-form>
+    </div>
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" class="noMarginTop" ng-model="isFormlyShowScope" />
+        Show scope
+      </label>
+    </div>
+    <div ng-if="isFormlyShowScope">
+      <hr />
+      <h2>Model</h2>
+      <pre>{{model | json}}</pre>
+      <h2>Fields <small>(note, functions are not shown)</small></h2>
+      <pre>{{rawFieldCode|json}}</pre>
+    </div>
+  </div>
+
 </div>

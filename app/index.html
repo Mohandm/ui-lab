@@ -10,9 +10,13 @@
 
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/lumen.css">
+    <link type="text/css" rel="stylesheet" href="thirdparty/angular-form-builder/angular-form-builder.css" />
+    <link type="text/css" rel="stylesheet" href="../bower_components/jquery-ui/themes/base/all.css" />
     <link rel="stylesheet" href="../bower_components/fontawesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="../bower_components/angular-aside/dist/css/angular-aside.min.css">
+    <link rel="stylesheet" href="../bower_components/ui-listView/dist/ui-listView.css">
+    <link rel="stylesheet" href="../bower_components/angular-toastr/dist/angular-toastr.css">
+    <link rel="stylesheet" href="styles/lumen.css">
 
     <!-- endbuild -->
   </head>
@@ -23,6 +27,7 @@
 
     <!-- Add your site or application content here -->
     <div ng-view=""></div>
+    <div class="footer"></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
@@ -58,7 +63,7 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-ui-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="bower_components/json3/lib/json3.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -67,22 +72,48 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/api-check/dist/api-check.js"></script>
+    <script  src="thirdparty/angular-form-builder/angular-form-builder.js"></script>
+    <script  src="thirdparty/angular-form-builder/angular-form-builder-components.js"></script>
+
+    <script  src="bower_components/angular-validator/dist/angular-validator.js"></script>
+    <script  src="bower_components/angular-validator/dist/angular-validator-rules.min.js"></script>
+
+
+    <script  src="bower_components/jquery-ui/jquery-ui.js"></script>
+
+    <script  src="bower_components/placeholders/dist/placeholders.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload-shim.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="thirdparty/ng-string.js"></script>
 
 
     <script src="bower_components/angular-formly/dist/formly.js"></script>
     <script src="bower_components/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js"></script>
     <script src="bower_components/angular-aside/dist/js/angular-aside.min.js"></script>
-
-
-
+    <script src="bower_components/ui-listView/dist/ui-listView.js"></script>
+    <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <script src="bower_components/deep-diff/releases/deep-diff-0.3.3.min.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/common.js"></script>
+        <script src="scripts/Directive.js"></script>
+        <script src="scripts/Factory.js"></script>
+        <script src="scripts/FormConstant.js"></script>
+        <script src="scripts/formlyCustomTypes.js"></script>
         <script src="scripts/controllers/login.js"></script>
         <script src="examples/scripts/controllers/intro-example.js"></script>
         <script src="examples/scripts/controllers/codementor.js"></script>
         <script src="scripts/controllers/designer.js"></script>
+        <script src="scripts/controllers/listpages.js"></script>
+        <script src="scripts/services/main.js"></script>
+        <script src="scripts/services/MetaDataMergeService.js"></script>
+        <script src="scripts/services/PageService.js"></script>
+        <script src="scripts/services/User.js"></script>
+
+
         <!-- endbuild -->
 </body>
 </html>

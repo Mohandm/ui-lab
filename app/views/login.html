@@ -9,12 +9,12 @@
   <div class="cyan-bar">
   </div>
   <section class="left-column">
-    <form name="form" class="form-group login-form" ng-submit="loginCtrl.login(loginCtrl.selectedUser, loginCtrl.selectedTenant)">
+    <form name="form" class="form-group login-form" ng-submit="login()">
       <fieldset class="mlogininput">
         <label>User Name</label>
-        <select name="user" ng-model="loginCtrl.selectedUser" ng-options="user.name for user in loginCtrl.users" ng-change="loginCtrl.onUserChange(loginCtrl.selectedUser)" class="form-control user-input mandatory" required></select>
+        <select name="user" ng-model="loginInfo.selectedUser" ng-options="user.name for user in users" ng-change="onUserChange(loginCtrl.selectedUser)" class="form-control user-input mandatory" required></select>
         <label>User Type</label>
-        <select name="tenant" ng-model="loginCtrl.selectedTenant" ng-options="tenant.description for tenant in loginCtrl.tenants" class="form-control tenant-input mandatory" required></select>
+        <select name="tenant" ng-model="loginInfo.selectedTenant" ng-options="tenant.description for tenant in tenants" class="form-control tenant-input mandatory" required></select>
       </fieldset>
       <fieldset class="submitBtnFieldSet">
         <button type="submit">Sign in</button>
