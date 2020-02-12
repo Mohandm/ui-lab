@@ -1,7 +1,6 @@
-name: CI
+name: test
 
-on: 
-  repository_dispatch:
+on: repository_dispatch
 
 jobs:
   build:
